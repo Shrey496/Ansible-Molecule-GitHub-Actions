@@ -1,0 +1,45 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "test"
+  test:
+    name: Molecule
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Check out the codebase
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v4
+
+      # Sets up Python on the GitHub runner's environment
+      - name: Set up Python3.
+        uses: actions/setup-python@v5
+        with: 
+          python-version: '3.x'
+
+      # Installs dependencies needed for testing
+      - name: Install test dependencies.
+        run: pip3 install molecule[docker] yamllint ansible-lint
+
+      # Runs molecule tests
+      - name: Run Molecule tests.
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+
+      
