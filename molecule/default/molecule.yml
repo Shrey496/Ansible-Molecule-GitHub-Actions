@@ -9,8 +9,10 @@ lint: |
   ansible-lint
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux8}-ansible:latest"
-    command: ""
+    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux8}-ansible:latest"
+    # command: ""
+    image: geerlingguy/docker-ubuntu2004-ansible
+    command: /sbin/init
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
