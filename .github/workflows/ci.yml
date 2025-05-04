@@ -33,7 +33,7 @@ jobs:
 
       # Installs dependencies needed for testing
       - name: Install test dependencies.
-        run: pip3 install molecule-plugin[docker] yamllint ansible-lint
+        run: pip3 install molecule-docker yamllint ansible-lint
 
       # Runs molecule tests
       - name: Run Molecule tests.
