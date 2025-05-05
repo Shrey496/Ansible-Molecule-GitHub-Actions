@@ -4,9 +4,9 @@
 
   tasks:
     - name: Update apt cache (on Debian).
-      ansible.builtin.apt:
-        update_cache: true
-        cache_valid_time: 3600
+      ansible.builtin.apt:        
+        update_cache: true        #Runs "apt-get update"
+        cache_valid_time: 3600    #If the update was run within an hour, it will skip the update
       when: ansible_os_family == 'Debian'
 
-- ansible.builtin.import_playbook: ../../main.yml
+- ansible.builtin.import_playbook: ../../main.yml        #Imports the contents of the main.yml file. An example of modularizing playbooks
