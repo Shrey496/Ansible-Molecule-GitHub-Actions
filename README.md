@@ -18,12 +18,12 @@ It basically makes sure that the playbook actually does what it says it would do
 ## Prerequisites
 * Access to GitHub
 
-## CI/CD flow
+## CI/CD flow using GitHub Actions
 1. Checkout repo
-2. Set up Python & install Molecule/Ansible
+2. Set up Python & install Molecule/Ansible 
 3. Run **molecule test**
    * Creates a container (instance)
-   * Applies Ansible role
+   * Executes the Ansible role (main.yml)
    * Verifies behavior of the service
    * Destroys the test container 
 
