@@ -25,7 +25,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Check out the codebase
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checks-out the repository under $GITHUB_WORKSPACE
         uses: actions/checkout@v4
 
       # Sets up Python on the GitHub runner's environment
