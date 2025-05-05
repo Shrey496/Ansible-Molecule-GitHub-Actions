@@ -1,24 +1,30 @@
 ---
+
+#Tells Molecule to install any required role dependencies via Ansible Galaxy
 dependency:
   name: galaxy
+
+#Uses docker to spin up images
 driver:
   name: docker
 lint: |
-  set -e
-  yamllint .
-  ansible-lint
+  set -e        #Fails if any command errors.
+  yamllint .    #Lints all YAML files
+  ansible-lint  #Checks Ansible for best practices 
+
 platforms:
-  - name: instance
-    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux8}-ansible:latest"
-    # command: ""
-    image: geerlingguy/docker-ubuntu2004-ansible
-    command: /sbin/init
+  - name: instance                                #Hostname of the container inside Molecule
+    image: geerlingguy/docker-ubuntu2004-ansible  #Custom docker image which comes preinstalled with Ansible
+    command: /sbin/init                           #Starts the container with the init process instead of just bash
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw    #systemd requires access to cgroups to manage services like Apache
+    cgroupns_mode: host                     #The container sees the ost's cgroup setup directly
     privileged: true
-    pre_build_image: true
+    pre_build_image: true                   #Skips rebuilding if the Docker image already exists
+
 provisioner:
   name: ansible
+
+#Molecule will look for verify.yml to conduct verification with Ansible tasks
 verifier:
   name: ansible
