@@ -18,6 +18,18 @@ It basically makes sure that the playbook actually does what it says it would do
 ## Prerequisites
 * Access to GitHub
 
+```mermaid
+graph TD
+    A[👨‍💻 Push Code to GitHub] -->|Trigger| B(GitHub Actions Runner)
+    B -->|1. Create| C[Molecule: Spin up Docker Container]
+    C -->|2. Converge| D[Run Ansible Playbook]
+    D -->|3. Verify| E{Idempotence Check}
+    E -- Fails --> F[❌ Build Failed]
+    E -- Passes --> G[4. Verify Side Effects]
+    G -->|5. Destroy| H[Molecule: Kill Container]
+    H --> I[✅ Build Success]
+```
+
 ## CI/CD flow using GitHub Actions
 1. Checkout repo
 2. Set up Python & install Molecule/Ansible 
