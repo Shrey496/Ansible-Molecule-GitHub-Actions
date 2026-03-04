@@ -46,10 +46,6 @@ jobs:
           yamllint \
           ansible-lint
 
-      - name: Install Ansible collections
-        run: |
-          ansible-galaxy collection install community.docker:==3.4.11
-
 
       # Runs molecule tests
       - name: Run Molecule tests.
