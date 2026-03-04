@@ -42,7 +42,7 @@ jobs:
           ansible-core==2.15.9 \
           molecule==6.0.2 \
           molecule-docker==2.1.0 \
-          docker \
+          comunity.docker: 3.4.11 \
           yamllint \
           ansible-lint
 
