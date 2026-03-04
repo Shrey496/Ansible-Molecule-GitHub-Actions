@@ -42,9 +42,14 @@ jobs:
           ansible-core==2.15.9 \
           molecule==6.0.2 \
           molecule-docker==2.1.0 \
-          comunity.docker: 3.4.11 \
+          docker \
           yamllint \
           ansible-lint
+
+      - name: Install Ansible collections
+        run: |
+          ansible-galaxy collection install community.docker:==3.4.11
+
 
       # Runs molecule tests
       - name: Run Molecule tests.
